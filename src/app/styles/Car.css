@@ -1,0 +1,12 @@
+.car {
+  display: grid;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+  margin: 1.5vh;
+  margin-bottom: 0;
+  height: 24vh;
+}
+
+.image {
+  margin: 3vh;
+}
