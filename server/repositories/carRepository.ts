@@ -6,7 +6,18 @@ const db: Connection = require("../dbConnection");
 
 const findAllCars = async function () {
   try {
-    const [result, fields] = await db.promise().execute("SELECT * from cars");
+    const [result] = await db.promise().execute("SELECT * from cars");
+    return result;
+  } catch {
+    throw error;
+  }
+};
+
+const findCarById = async function (id: number) {
+  try {
+    const result = await db
+      .promise()
+      .execute(`SELECT * from cars WHERE carId = ${id}`);
     return result;
   } catch {
     throw error;
@@ -30,7 +41,37 @@ const createCar = async function (car: Car) {
   }
 };
 
+const updateCar = async function (car: Car) {
+  try {
+    const [result] = await db
+      .promise()
+      .execute(
+        `UPDATE cars SET brand = "${car.brand}", model = "${car.model}" WHERE carId = "${car.id}"`
+      );
+    const updatedCar = await db
+      .promise()
+      .execute(`SELECT * FROM cars WHERE carId = "${car.id}"`);
+    return updatedCar;
+  } catch {
+    throw error;
+  }
+};
+
+const deleteCarById = async function (id: number) {
+  try {
+    const result = await db
+      .promise()
+      .execute(`DELETE from cars WHERE carId = ${id}`);
+    return result;
+  } catch {
+    throw error;
+  }
+};
+
 module.exports = {
   findAllCars,
   createCar,
+  findCarById,
+  deleteCarById,
+  updateCar,
 };

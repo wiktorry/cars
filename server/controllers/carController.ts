@@ -13,6 +13,15 @@ const getAllCars = async function (req: Request, res: Response) {
   }
 };
 
+const getCarById = async function (req: Request, res: Response) {
+  try {
+    const result = await service.findCarById(req.params.id);
+    res.status(200).json(result);
+  } catch {
+    res.status(404).json({ message: "Car not found" });
+  }
+};
+
 const createCar = async function (req: Request, res: Response) {
   try {
     const result = await service.createCar(req.body);
@@ -23,7 +32,29 @@ const createCar = async function (req: Request, res: Response) {
   }
 };
 
+const updateCar = async function (req: Request, res: Response) {
+  try {
+    const result = await service.updateCar(req.body);
+    res.status(200).json(result);
+  } catch {
+    res.status(400).json({ message: "" });
+    console.log(error);
+  }
+};
+
+const deleteCarById = async function (req: Request, res: Response) {
+  try {
+    const result = await service.deleteCarById(req.params.id);
+    res.status(200).json(result);
+  } catch {
+    res.status(404).json({ message: "Car not found" });
+  }
+};
+
 module.exports = {
   getAllCars,
   createCar,
+  getCarById,
+  deleteCarById,
+  updateCar,
 };

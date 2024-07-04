@@ -12,6 +12,15 @@ const findAllCars = async function () {
   }
 };
 
+const findCarById = async function (id: number) {
+  try {
+    const result = await repository.findCarById(id);
+    return result;
+  } catch {
+    throw error;
+  }
+};
+
 const createCar = async function (car: Car) {
   try {
     const result = await repository.createCar(car);
@@ -21,7 +30,28 @@ const createCar = async function (car: Car) {
   }
 };
 
+const updateCar = async function (car: Car) {
+  try {
+    const result = await repository.updateCar(car);
+    return result;
+  } catch {
+    throw error;
+  }
+};
+
+const deleteCarById = async function (id: number) {
+  try {
+    const result = await repository.deleteCarById(id);
+    return result;
+  } catch {
+    throw error;
+  }
+};
+
 module.exports = {
   findAllCars,
   createCar,
+  findCarById,
+  deleteCarById,
+  updateCar,
 };
