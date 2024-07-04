@@ -1,7 +1,7 @@
 import { Connection } from "mysql2";
 
-var mysql = require("mysql2");
-var con: Connection = mysql.createConnection({
+const mysql = require("mysql2");
+const con: Connection = mysql.createConnection({
   host: "127.0.0.1",
   port: 3307,
   user: "root",
@@ -16,9 +16,10 @@ con.connect((err) => {
   con.execute("CREATE DATABASE IF NOT EXISTS cars");
   con.changeUser({ database: "cars" });
   con.execute(
-    "CREATE TABLE cars (carId int, brand varchar(255), model varchar(255))"
+    "CREATE TABLE IF NOT EXISTS cars (carId int, brand varchar(255), model varchar(255))"
   );
+  con.execute('INSERT INTO cars (carId, brand, model) VALUES (1, "BMW", "M2")');
   console.log("connected to database");
 });
 
-export { con };
+module.exports = con;
