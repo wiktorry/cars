@@ -5,6 +5,6 @@ const express = require("express");
 const router: Router = express.Router();
 const controller = require("../controllers/carController");
 
-router.get("/", controller.getAllCars);
+router.route("/").get(controller.getAllCars).post(controller.createCar);
 
 module.exports = router;

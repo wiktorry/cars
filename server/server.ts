@@ -4,10 +4,8 @@ const express = require("express");
 const app: Express = express();
 const carRouter = require("./routes/cars");
 
-app.use("/cars", carRouter);
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("XD");
-});
+app.use("/cars", carRouter);
 
 app.listen(5000);

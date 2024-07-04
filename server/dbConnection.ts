@@ -16,9 +16,9 @@ con.connect((err) => {
   con.execute("CREATE DATABASE IF NOT EXISTS cars");
   con.changeUser({ database: "cars" });
   con.execute(
-    "CREATE TABLE IF NOT EXISTS cars (carId int, brand varchar(255), model varchar(255))"
+    "CREATE TABLE IF NOT EXISTS cars (carId int AUTO_INCREMENT, brand varchar(255), model varchar(255), PRIMARY KEY (carId))"
   );
-  con.execute('INSERT INTO cars (carId, brand, model) VALUES (1, "BMW", "M2")');
+  con.execute('INSERT INTO cars (brand, model) VALUES ("BMW", "M2")');
   console.log("connected to database");
 });
 
