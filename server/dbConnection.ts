@@ -18,7 +18,10 @@ con.connect((err) => {
   con.execute(
     "CREATE TABLE IF NOT EXISTS cars (carId int AUTO_INCREMENT, brand varchar(255), model varchar(255), PRIMARY KEY (carId))"
   );
-  con.execute('INSERT INTO cars (brand, model) VALUES ("BMW", "M2")');
+  con.execute(
+    "CREATE TABLE IF NOT EXISTS users (userId int AUTO_INCREMENT, email varchar(255), password varchar(60), PRIMARY KEY (userId))"
+  );
+  // con.execute('INSERT INTO cars (brand, model) VALUES ("BMW", "M2")');
   console.log("connected to database");
 });
 

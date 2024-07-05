@@ -31,7 +31,6 @@ const createCar = async function (car: Car) {
       .execute(
         `INSERT INTO cars (carId, brand, model) VALUES (NULL, "${car.brand}", "${car.model}")`
       );
-    console.log(result);
     const newCar = await db
       .promise()
       .execute(`SELECT * FROM cars WHERE carId = ${result.insertId}`);
