@@ -27,7 +27,17 @@ const findUserByEmail = async function (email: string) {
   return result;
 };
 
+const findUserById = async function (id: number) {
+  const [result] = await db
+    .promise()
+    .execute(
+      `SELECT userId, email, password FROM users WHERE userId = "${id}"`
+    );
+  return result;
+};
+
 module.exports = {
   createUser,
   findUserByEmail,
+  findUserById,
 };

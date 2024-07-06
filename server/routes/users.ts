@@ -8,4 +8,6 @@ router.route("/register").post(controller.registerUser);
 
 router.route("/login").post(controller.loginUser);
 
+router.route("/:id").get(controller.getUserById);
+
 module.exports = router;
