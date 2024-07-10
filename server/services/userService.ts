@@ -29,15 +29,8 @@ const loginUser = async function (user: User) {
   return "Authentication succeed";
 };
 
-const verifyToken = async function (req: Request) {
-  const token = req.header("Authorization")?.split(" ")[1];
-  const decodedToken = await jwt.verify(token, "secret");
-  return decodedToken;
-};
-
 const getUserById = async function (req: Request) {
-  const token = await verifyToken(req);
-  if (!(token.userId == req.params.id)) {
+  if (!(req.body.userId == req.params.id)) {
     throw error;
   }
   return repository.findUserById(req.params.id);
