@@ -10,40 +10,43 @@ const findAllCars = async function () {
 };
 
 const findCarById = async function (id: number) {
+  console.log(id);
   const result = await db
     .promise()
-    .execute(`SELECT * from cars WHERE carId = ${id}`);
+    .execute(`SELECT * from cars WHERE carId = ?`, [id]);
   return result;
 };
 
 const createCar = async function (car: Car) {
   const [result]: any = await db
     .promise()
-    .execute(
-      `INSERT INTO cars (carId, brand, model) VALUES (NULL, "${car.brand}", "${car.model}")`
-    );
+    .execute(`INSERT INTO cars (carId, brand, model) VALUES (NULL, ?, ?)`, [
+      car.brand,
+      car.model,
+    ]);
   const newCar = await db
     .promise()
-    .execute(`SELECT * FROM cars WHERE carId = ${result.insertId}`);
+    .execute(`SELECT * FROM cars WHERE carId = ?`, [result.insertId]);
   return newCar;
 };
 
 const updateCar = async function (car: Car) {
   const [result] = await db
     .promise()
-    .execute(
-      `UPDATE cars SET brand = "${car.brand}", model = "${car.model}" WHERE carId = "${car.id}"`
-    );
+    .execute(`UPDATE cars SET brand = ?, model = ? WHERE carId = ?`, [
+      car.brand,
+      car.model,
+    ]);
   const updatedCar = await db
     .promise()
-    .execute(`SELECT * FROM cars WHERE carId = "${car.id}"`);
+    .execute(`SELECT * FROM cars WHERE carId = ?`, [car.id]);
   return updatedCar;
 };
 
 const deleteCarById = async function (id: number) {
   const result = await db
     .promise()
-    .execute(`DELETE from cars WHERE carId = ${id}`);
+    .execute(`DELETE from cars WHERE carId = ?`, [id]);
   return result;
 };
 
