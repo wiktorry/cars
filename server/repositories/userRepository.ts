@@ -1,6 +1,5 @@
 import { Connection } from "mysql2";
 import { User } from "../entities/User";
-import { error } from "console";
 
 const db: Connection = require("../dbConnection");
 

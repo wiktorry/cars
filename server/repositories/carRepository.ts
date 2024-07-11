@@ -10,6 +10,7 @@ const findAllCars = async function () {
 };
 
 const findCarById = async function (id: number) {
+  console.log(id);
   const result = await db
     .promise()
     .execute(`SELECT * from cars WHERE carId = ${id}`);
